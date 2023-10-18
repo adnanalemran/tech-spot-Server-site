@@ -35,6 +35,11 @@ async function run() {
               res.status(500).json({ error: "Failed to insert data into the database" });
             }
           });
+
+          app.get("/product", async (req, res) => {
+            const result = await productCollection.find().toArray();
+            res.send(result);
+          });
           
 
 
