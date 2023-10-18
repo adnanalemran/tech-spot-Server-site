@@ -22,8 +22,20 @@ async function run() {
     try {
 
         await client.connect();
+        const productCollection = client.db('productDB').collection('products');
 
-
+        app.post("/product", async (req, res) => {
+            const product = req.body;
+            try {
+              const result = await productCollection.insertOne(product);
+              console.log("Inserted document with _id: " + result.insertedId);
+              res.status(201).json({ message: "Product added successfully" });
+            } catch (error) {
+              console.error(error);
+              res.status(500).json({ error: "Failed to insert data into the database" });
+            }
+          });
+          
 
 
 
