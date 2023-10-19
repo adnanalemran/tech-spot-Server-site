@@ -1,12 +1,23 @@
-const express = require("express");
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb"); // Import ObjectId from mongodb
-const cors = require("cors");
-const app = express();
+const express = require('express');
+const cors = require('cors');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const dotenv = require('dotenv'); // Import dotenv
 
+dotenv.config(); // Load environment variables from .env file
+
+const app = express();
 const port = process.env.PORT || 5000;
 
-const uri = "mongodb+srv://TechSpot:tN3JWkfpVxZLyU6D@cluster0.fhwdeyh.mongodb.net/?retryWrites=true&w=majority";
+// middleware
+app.use(cors());
+app.use(express.json());
 
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fhwdeyh.mongodb.net/?retryWrites=true&w=majority`;
+
+// const uri = `mongodb+srv://TechSpot:tN3JWkfpVxZLyU6@cluster0.fhwdeyh.mongodb.net/?retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://TechSpot:GcUyqG3Ne9TIVZDH@cluster0.fhwdeyh.mongodb.net/?retryWrites=true&w=majority`;
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fhwdeyh.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
